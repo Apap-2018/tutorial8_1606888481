@@ -29,9 +29,16 @@ public class UserRoleServiceImpl implements UserRoleService {
 
 	@Override
 	public void updatePassword(UserRoleModel user, String newPassword) {
-		user.setPassword(newPassword);
+		String pass = encrypt(newPassword);
+		user.setPassword(pass);
 		userDb.save(user);
 		
+	}
+
+	@Override
+	public UserRoleModel searchUserByUsername(String username) {
+		return userDb.findByUsername(username);
+
 	}
 
 }
